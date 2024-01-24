@@ -1,6 +1,6 @@
 import { $ } from '@wdio/globals'
 
-export default class UnitPage {
+class UnitPage {
 
     public get servicesBlock () {
         return $('.UnitCharacteristics_services___vypr');
@@ -14,3 +14,5 @@ export default class UnitPage {
         (await this.logo).click();
     }
 }
+
+export default new UnitPage();
