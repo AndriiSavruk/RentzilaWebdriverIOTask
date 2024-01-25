@@ -9,11 +9,20 @@ class ProductsPage {
         return $('//*[@id="__next"]/div/main/div/div/div[3]');
     }
     public get anotherCheckBox () {
-        return $('#serviceCategory-4')
+        return $('#serviceCategory-4');
+    }
+    public get searchInput () {
+        return $('input[data-testid="searchInput"]');
+    }
+    public get logo () {
+        return $('div[data-testid="logo"]');
     }
 
     public async clickOnUnitBlock (i:number) {
         (await $('//*[@id="__next"]/div/main/div/div/div[3]/div[3]/a/div['+i+']/span/img')).click();
+    }
+    public async clickOnLogo () {
+        (await this.logo).click();
     }
 }
 

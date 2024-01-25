@@ -65,4 +65,64 @@ describe('Test cases', () => {
         await expect(browser).toHaveUrl('https://stage.rentzila.com.ua/');
          }
     })
+
+    it('Test-case#214  Verify that all elements on the footer are displayed and all links are clickable', async () => {
+        // Preconditions
+        await browser.reloadSession();
+        await browser.url('');
+        await browser.maximizeWindow();
+        // Step 1  Scroll down to the footer.
+        await MainPage.footer.scrollIntoView();
+        await MainPage.clickOnTelegramClose();
+        await expect(MainPage.footer).toBeDisplayed();
+        await expect(MainPage.footerLogo).not.toBeClickable();
+        // Step 2  Check that ""Про нас"" label is displayed on the footer.
+        await expect(MainPage.aboutUsLabel).toBeDisplayed();
+        // Step 3 Check that ""Політика конфіденційності"" link is displayed on the footer.
+        await expect(MainPage.politicConfLink).toBeDisplayed();
+        // Step 4 Check that ""Правила використання файлів cookie"" link is displayed on the footer.
+        await expect(MainPage.cookieUsingRulesLink).toBeDisplayed();
+        // Step 5 Check that ""Умови доступу та користування"" link is displayed on the footer.
+        await expect(MainPage.accessAndUsingTermsLink).toBeDisplayed();
+        // Step 6 Check that ""Користувачам"" label is displayed on the footer.
+        await expect(MainPage.forUsersLabel).toBeDisplayed();
+        // Step 7 Check that ""Оголошення"" link is displayed on the footer.
+        await expect(MainPage.announceLink).toBeDisplayed();
+        // Step 8 Check that ""Тендери"" link is displayed on the footer.
+        await expect(MainPage.tendersLink).toBeDisplayed();
+        // Step 9 Check that the ""Контакти"" label and email are displayed on the footer.
+        await expect(MainPage.contactsLabel).toBeDisplayed();
+        // Step 10 Check that the Rentzila logo is displayed on the footer.
+        await expect(MainPage.footerLogo).toBeDisplayed();
+        // Step 11 Check that the ""Усі права захищені"" label is displayed on the footer.
+        await expect(MainPage.allRigthsProtectedLabel).toBeDisplayed();
+        // Step 12 Click the ""Політика конфіденційності"" link on the footer.
+        await MainPage.clickOnPoliticsConfLink();
+        await expect(browser).toHaveUrlContaining('privacy-policy');
+        await expect(browser).toHaveTitleContaining('Політика конфіденційності');
+        await browser.back()
+        // Step 13 Scroll down to the footer and click the ""Правила використання файлів cookie"" link  on the footer.
+        await MainPage.footer.scrollIntoView();
+        await MainPage.clickOnCookieUsingRules();
+        await expect(browser).toHaveUrlContaining('cookie-policy');
+        await expect(browser).toHaveTitleContaining('Політика використання cookie');
+        await browser.back();
+        // Step 14 Scroll down to the footer and click the ""Умови доступу та користування"" link on the footer.
+        await MainPage.footer.scrollIntoView();
+        await MainPage.clickOnAccessAndUsingTermsLink();
+        await expect(browser).toHaveUrlContaining('terms-conditions');
+        await expect(browser).toHaveTitleContaining('Угода користувача');
+        await browser.back();
+        // Step 15 Scroll down to the footer and click on the ""Оголошення"" link.
+        await MainPage.footer.scrollIntoView();
+        await MainPage.clickOnAnnounceLink();
+        await expect(browser).toHaveUrlContaining('products');
+        await expect(ProductsPage.searchInput).toBeDisplayed();
+        await expect(ProductsPage.searchInput).toHaveAttr('placeholder', 'Пошук оголошень або послуг');
+        // Step 16  Click the Rentzila logo on the header.
+        // await ProductsPage.clickOnLogo();
+        // await expect(browser).toHaveUrl('https://stage.rentzila.com.ua/');
+        // await expect(MainPage.serviceSearchSpecTechTitle).toBeDisplayed();
+
+    })
 })

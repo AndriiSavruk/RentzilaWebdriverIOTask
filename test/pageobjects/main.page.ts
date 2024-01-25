@@ -28,6 +28,45 @@ import { $ } from '@wdio/globals';
     public get specialEquipmentPopularTitle () {
         return $('h3[data-testid="specialEquipment__populyarna"]');
     }
+    public get footer () {
+        return $('//*[@id="__next"]/div[3]/div');
+    }
+    public get footerLogo () {
+        return $('div[data-testid="logo"]');
+    }
+    public get aboutUsLabel () {
+        return $('div[data-testid="content"]');
+    }
+    public get politicConfLink () {
+        return $('div[data-testid="politika-konfidenciinosti"]');
+    }
+    public get cookieUsingRulesLink () {
+        return $('div[data-testid="pravila-vikoristannya-failiv-cookie"]');
+    }
+    public get accessAndUsingTermsLink () {
+        return $('div[data-testid="umovi-dostupu-ta-koristuvannya"]');
+    }
+    public get forUsersLabel () {
+        return $('//*[@id="__next"]/div[3]/div/div[1]/div[2]/div[1]');
+    }
+    public get announceLink () {
+        return $('div[data-testid="ogoloshennya"]');
+    }
+    public get tendersLink () {
+        return $('div[data-testid="tenderi"]');
+    }
+    public get contactsLabel () {
+        return $('//*[@id="__next"]/div[3]/div/div[1]/div[3]/div[1]');
+    }
+    public get telegramCloseX () {
+        return $('div[data-testid="crossButton"]');
+    }
+    public get allRigthsProtectedLabel () {
+        return $('div[data-testid="copyright"]');
+    }
+    public serviceSearchSpecTechTitle () {
+        return $('//*[@id="__next"]/div[3]/main/div[1]/div/div[1]');
+    }
     public async clickOnServicesItem (i:number) {
         (await $('//*[@id="__next"]/div[3]/main/section[1]/div[2]/div['+i+']')).click();
     }
@@ -39,6 +78,21 @@ import { $ } from '@wdio/globals';
     }
     public async getNameOfSpecialEquipmentItem (i:number) {
         return (await $('//*[@id="__next"]/div[3]/main/section[2]/div[2]/div[1]/div['+i+']')).getText(); 
+    }
+    public async clickOnTelegramClose () {
+        (await this.telegramCloseX).click();
+    }
+    public async clickOnPoliticsConfLink () {
+        (await this.politicConfLink).click();
+    }
+    public async clickOnCookieUsingRules () {
+        (await this.cookieUsingRulesLink).click();
+    }
+    public async clickOnAccessAndUsingTermsLink () {
+        (await this.accessAndUsingTermsLink).click();
+    }
+    public async clickOnAnnounceLink () {
+        (await this.announceLink).click();
     }
 }
 
