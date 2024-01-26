@@ -9,6 +9,9 @@ class UnitPage {
     public get logo () {
         return $('div[data-testid="logo"]');
     }
+    public get unitTitle () {
+        return $('//*[@id="__next"]/div[3]/main/div/div[3]/div[2]/div[1]/h1');
+    }
 
     public async clickOnLogo () {
         (await this.logo).click();

@@ -17,6 +17,9 @@ class ProductsPage {
     public get logo () {
         return $('div[data-testid="logo"]');
     }
+    public get unitsBlockTitle () {
+        return $('//*[@id="__next"]/div/main/div/div/div[3]/div[1]/h1');
+    }
 
     public async clickOnUnitBlock (i:number) {
         (await $('//*[@id="__next"]/div/main/div/div/div[3]/div[3]/a/div['+i+']/span/img')).click();
