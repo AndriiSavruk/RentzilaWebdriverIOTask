@@ -52,8 +52,8 @@ describe('Test cases', () => {
          // Step 5 Repeat test case for all other elements on all tabs below the ""Спецтехніка"" label.
          for (let i=1; i<=7; i++) {
         // Step 2 Click on the first element in the ""Спецтехніка"" list.
-        // let specialEquipmentName:string;
-        // specialEquipmentName = await MainPage.getNameOfSpecialEquipmentItem(i);
+        let specialEquipmentName:string;
+        specialEquipmentName = await MainPage.getNameOfSpecialEquipmentItem(i);
         await MainPage.clickOnSpecialEquipmentItem(i);
         await expect(browser).toHaveUrlContaining('products');
         await expect(ProductsPage.anotherCheckBox).toBeChecked();
@@ -61,7 +61,7 @@ describe('Test cases', () => {
         // Step 3 Click on the first relevant unit.
         await ProductsPage.clickOnUnitBlock(1);
         await expect(browser).toHaveUrlContaining('unit');
-        // await expect(UnitPage.servicesBlock).toHaveTextContaining(specialEquipmentName);
+        await expect(UnitPage.servicesBlock).toHaveTextContaining(specialEquipmentName);
         // Step 4 Click on the logo in the left corner of the page.
         await UnitPage.clickOnLogo();
         await expect(browser).toHaveUrl('https://stage.rentzila.com.ua/');
@@ -348,6 +348,7 @@ describe('Test cases', () => {
         await browser.maximizeWindow();
         await MainPage.clickOnTelegramClose();
         // Step 1 Verify the ""Каталог"" button is displayed in the top left corner under the logo
+        await browser.pause(3000);
         await expect(MainPage.catalogLink).toBeDisplayed();
         // Step 2 Click on the ""Каталог"" button.
         await MainPage.clickOnCatalogLink();
