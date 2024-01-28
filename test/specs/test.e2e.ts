@@ -134,7 +134,7 @@ describe('Test cases', () => {
         await expect(MainPage.emailLink).toHaveHref('mailto:info@rentzila.com.ua');
     })
 
-    it('Test-case #C530 part 1 Verify Search Input', async () => {
+    it('Test-case #C530 Verify Search Input', async () => {
         // Preconditions
         await browser.reloadSession();
         await browser.url('');
@@ -281,50 +281,6 @@ describe('Test cases', () => {
         await expect(MainPage.searchInput).toHaveValue('')
     })
     
-    it('Test-case #C530 part 3', async () => {
-        // Preconditions
-        await browser.reloadSession();
-        await browser.url('');
-        await browser.maximizeWindow();
-        // Step 13 Return back to the previous page and click on the ""Пошук оголошення за ключовими словами"" 
-        // search input and enter ""Асфальтування"".
-        // await browser.back();
-        await MainPage.clickOnSearchInput();
-        await MainPage.setValueInSearchInput('Асфальтування');
-        await expect(MainPage.popUpSearchResultBlock).toBeDisplayed();
-        await expect(MainPage.popUpServices).toHaveTextContaining('Асфальтування');
-        // Step 14 Click the ""Асфальтування"" in the ""Послуги"" section in the dropdown.
-        await MainPage.clickOnAsphaltingService();
-        await expect(browser).toHaveUrlContaining('products');
-        await expect(ProductsPage.choosenFilters).toHaveTextContaining('Асфальтування');
-        await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('Знайдено');
-        await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('на видимій території');
-        // Step 15 Return back to the previous page, click on the ""Пошук оголошення за ключовими словами"" 
-        //search input and enter ""Драглайн"".
-        await browser.back();
-        await MainPage.clickOnSearchInput();
-        await MainPage.setValueInSearchInput('Драглайн');
-        await expect(MainPage.popUpSearchResultBlock).toBeDisplayed();
-        await expect(MainPage.popUpCategories).toHaveTextContaining('драглайни');
-        // Step 16  Click the ""драглайни"" in the ""Категорії"" section in the dropdown.
-        await MainPage.clickOnDraglineCategorie();
-        await expect(browser).toHaveUrlContaining('products');
-        await expect(ProductsPage.choosenFilters).toHaveTextContaining('драглайни');
-        await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('Знайдено');
-        await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('на видимій території');
-        // Step 17 Return back to the previous page, click on the ""Пошук оголошення за ключовими словами"" 
-        //search input and enter the ""Ремонт"".
-        await browser.back();
-        await MainPage.clickOnSearchInput();
-        await MainPage.setValueInSearchInput('Ремонт');
-        await expect(MainPage.searchResult).toHaveTextContaining('Ремонт');
-        await expect(MainPage.popUpSearchResultBlock).toHaveTextContaining('Ремонт');
-        // Step 18 Click on the ""X"" button in the search input.
-        await MainPage.clickOnSearchClearBtn();
-        await expect(MainPage.searchResult).not.toBeDisplayed();
-        await expect(MainPage.searchInput).toHaveValue('')
-    })
-
     it('Test-case #C226 Verify ""У Вас залишилися питання?"" form', async () => {
         // Preconditions
         await browser.reloadSession();
