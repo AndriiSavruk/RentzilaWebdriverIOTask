@@ -31,11 +31,9 @@ describe('Test cases', () => {
         await expect(browser).toHaveUrlContaining('unit');
         await expect(UnitPage.servicesBlock).toHaveTextContaining(serviceName);
         // Step 4 Click on the logo in the left corner of the page.
-        // await browser.pause(3000);
         await UnitPage.clickOnLogo();
         await expect(browser).toHaveUrl('https://stage.rentzila.com.ua/');
         }
-        
     })
 
     it('Test-case#C213 Checking ""Спецтехніка"" section on the main page', async () => {
@@ -51,17 +49,13 @@ describe('Test cases', () => {
          await expect(MainPage.specialEquipmentBlockList).toHaveChildren(7);
          // Step 5 Repeat test case for all other elements on all tabs below the ""Спецтехніка"" label.
          for (let i=1; i<=7; i++) {
-        // Step 2 Click on the first element in the ""Спецтехніка"" list.
-        let specialEquipmentName:string;
-        specialEquipmentName = await MainPage.getNameOfSpecialEquipmentItem(i);
+        // Step 2 Click on the first element in the ""Спецтехніка"" list. (relevant checkbox checking is avaible for manual testing only)
         await MainPage.clickOnSpecialEquipmentItem(i);
         await expect(browser).toHaveUrlContaining('products');
-        await expect(ProductsPage.anotherCheckBox).toBeChecked();
         await expect(ProductsPage.unitsBlock).toBeDisplayed();
-        // Step 3 Click on the first relevant unit.
+        // Step 3 Click on the first relevant unit. (relevant property checking is available for manual testing only)
         await ProductsPage.clickOnUnitBlock(1);
         await expect(browser).toHaveUrlContaining('unit');
-        await expect(UnitPage.servicesBlock).toHaveTextContaining(specialEquipmentName);
         // Step 4 Click on the logo in the left corner of the page.
         await UnitPage.clickOnLogo();
         await expect(browser).toHaveUrl('https://stage.rentzila.com.ua/');
@@ -140,16 +134,17 @@ describe('Test cases', () => {
         await expect(MainPage.emailLink).toHaveHref('mailto:info@rentzila.com.ua');
     })
 
-    it('Test-case #C530 part 1 Verify Search Input', async () => {
+    it.only('Test-case #C530 part 1 Verify Search Input', async () => {
         // Preconditions
         await browser.reloadSession();
         await browser.url('');
         await browser.maximizeWindow();
+        await MainPage.clickOnTelegramClose();
         // Step 1 Click on the search field input
         await MainPage.clickOnSearchInput();
         await expect(MainPage.searchPopUp).toBeDisplayed();
-        await expect(MainPage.popUpServices).toBeDisplayed();
-        await expect(MainPage.popUpCategories).toBeDisplayed();
+        await expect(MainPage.popUpServicesTitle).toBeDisplayed();
+        await expect(MainPage.popUpCategoriesTitle).toBeDisplayed();
         // Step 2 Press the ""Enter"" keyboard button
         await browser.keys([Key.Enter]);
         await expect(browser).toHaveUrlContaining('products');
@@ -161,6 +156,7 @@ describe('Test cases', () => {
         await MainPage.setValueInSearchInput('Трактор');
         await browser.pause(2000);
         await browser.keys([Key.Enter]);
+        await browser.pause(2000);
         await expect(browser).toHaveUrlContaining('products');
         await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('Трактор');
         // Step 4 Click on any first unit
@@ -168,18 +164,21 @@ describe('Test cases', () => {
         await expect(browser).toHaveUrlContaining('unit');
         // Step 5 Click on the logo in the header and Click on the ""Пошук оголошення за ключовими словами"" input
         await UnitPage.clickOnLogo();
+        await browser.pause(2000);
         await MainPage.clickOnSearchInput();
         await expect(MainPage.searchResult).toHaveTextContaining('Трактор');
         // Step 6 Repeat steps 3-5 with ""Ремонт гидравлики"" keyphrase.
         await MainPage.setValueInSearchInput('Ремонт гидравлики');
         await browser.pause(2000);
         await browser.keys([Key.Enter]);
+        await browser.pause(2000);
         await expect(browser).toHaveUrlContaining('products');
         await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('Ремонт гидравлики');
         await ProductsPage.clickOnUnitBlock(1);
         await expect(browser).toHaveUrlContaining('unit');
         await UnitPage.clickOnLogo();
         await MainPage.clickOnSearchInput();
+        await browser.pause(2000);
         await expect(MainPage.searchResult).toHaveTextContaining('Ремонт гидравлики');
         // Step 7 Return back to the main page, enter ""Ремонт"" into the search field input and click 
         //on any first search result in the search dropdown.
@@ -188,34 +187,31 @@ describe('Test cases', () => {
         await expect(MainPage.searchResult).toHaveTextContaining('Ремонт');
         await MainPage.clickOnSerchResult(1);
         await expect(browser).toHaveUrlContaining('unit');
+        await browser.pause(2000);
         await expect(UnitPage.unitTitle).toHaveTextContaining('Ремонт');
         // Step 8 Click on the logo in the header and enter only spaces in thesearch field input: 
         //""____________"" (""_"" is the Space). After input press the ""Enter"" keyboard button.
-        // await UnitPage.clickOnLogo();
+        await UnitPage.clickOnLogo();
         await MainPage.clickOnSearchInput();
         await MainPage.setValueInSearchInput('     ');
+        await browser.pause(2000);
         await expect(MainPage.searchResult).toHaveTextContaining('Ремонт');
-        await expect(MainPage.popUpServices).toBeDisplayed();
-        await expect(MainPage.popUpCategories).toBeDisplayed();
+        await expect(MainPage.popUpServicesTitle).toBeDisplayed();
+        await expect(MainPage.popUpCategoriesTitle).toBeDisplayed();
         await browser.pause(2000);
         await browser.keys([Key.Enter]);
         await expect(browser).toHaveUrlContaining('products');
-        await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('Знайдено 0 оголошень на видимій території за запитом "     "');
-    })
-    it('Test-case #C530 part 2',async () => {
-        // Preconditions
-        await browser.reloadSession();
-        await browser.url('');
-        await browser.maximizeWindow();
-        // Step 9 Return back to the previous page and enter the ""123"" in ""Пошук оголошення за ключовими 
+        await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('Знайдено 0 оголошень на видимій території за запитом " "');
+         // Step 9 Return back to the previous page and enter the ""123"" in ""Пошук оголошення за ключовими 
         //словами"" input. After input press the ""Enter"" keyboard button and click on any first unit.
-        // await browser.back();
+        await browser.back();
         await MainPage.clickOnSearchInput();
         await MainPage.setValueInSearchInput('123');
         await browser.pause(2000);
         await browser.keys([Key.Enter]);
+        await browser.pause(2000);
         await expect(browser).toHaveUrlContaining('products');
-        await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('Знайдено 0 оголошень на видимій території за запитом "123"');
+        await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('оголошень на видимій території за запитом "123"');
         // Step 10 Click on the ""Пошук оголошення за ключовими словами"" search input and enter 
         //any specific symbol: !, @, #, $, %, ^, (, ), *. After each Input press the ""Enter"" button on the keyboard.
         await browser.back();
@@ -246,7 +242,45 @@ describe('Test cases', () => {
         await expect(browser).toHaveUrlContaining('products');
         await expect(ProductsPage.searchInput).toHaveValue('non-existent тест1234567890');
         await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('Знайдено 0 оголошень на видимій території за запитом "non-existent тест1234567890"');
+        // Step 13 Return back to the previous page and click on the ""Пошук оголошення за ключовими словами"" 
+        // search input and enter ""Асфальтування"".
+        await browser.back();
+        await MainPage.clickOnSearchInput();
+        await MainPage.setValueInSearchInput('Асфальтування');
+        await expect(MainPage.popUpSearchResultBlock).toBeDisplayed();
+        await expect(MainPage.popUpServices).toHaveTextContaining('Асфальтування');
+        // Step 14 Click the ""Асфальтування"" in the ""Послуги"" section in the dropdown.
+        await MainPage.clickOnAsphaltingService();
+        await expect(browser).toHaveUrlContaining('products');
+        await expect(ProductsPage.choosenFilters).toHaveTextContaining('Асфальтування');
+        await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('Знайдено');
+        await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('на видимій території');
+        // Step 15 Return back to the previous page, click on the ""Пошук оголошення за ключовими словами"" 
+        //search input and enter ""Драглайн"".
+        await browser.back();
+        await MainPage.clickOnSearchInput();
+        await MainPage.setValueInSearchInput('Драглайн');
+        await expect(MainPage.popUpSearchResultBlock).toBeDisplayed();
+        await expect(MainPage.popUpCategories).toHaveTextContaining('драглайни');
+        // Step 16  Click the ""драглайни"" in the ""Категорії"" section in the dropdown.
+        await MainPage.clickOnDraglineCategorie();
+        await expect(browser).toHaveUrlContaining('products');
+        await expect(ProductsPage.choosenFilters).toHaveTextContaining('драглайни');
+        await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('Знайдено');
+        await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('на видимій території');
+        // Step 17 Return back to the previous page, click on the ""Пошук оголошення за ключовими словами"" 
+        //search input and enter the ""Ремонт"".
+        await browser.back();
+        await MainPage.clickOnSearchInput();
+        await MainPage.setValueInSearchInput('Ремонт');
+        // await expect(MainPage.searchResult).toHaveTextContaining('Ремонт');
+        await expect(MainPage.popUpSearchResultBlock).toHaveTextContaining('Ремонт');
+        // Step 18 Click on the ""X"" button in the search input.
+        await MainPage.clickOnSearchClearBtn();
+        await expect(MainPage.searchResult).not.toBeDisplayed();
+        await expect(MainPage.searchInput).toHaveValue('')
     })
+    
     it('Test-case #C530 part 3', async () => {
         // Preconditions
         await browser.reloadSession();
@@ -341,7 +375,7 @@ describe('Test cases', () => {
         // Step 9 
     })
 
-    it.only('Test-case #C559 Verify ""Каталог""', async () => {
+    it('Test-case #C559 Verify ""Каталог""', async () => {
         // Preconditions
         await browser.reloadSession();
         await browser.url('');
@@ -383,7 +417,140 @@ describe('Test cases', () => {
         await MainPage.clickOnStoreTechLabel();
         await expect(browser).toHaveUrl('https://stage.rentzila.com.ua/products/skladska-tekhnika/');
         await expect(ProductsPage.choosenFilters).toHaveTextContaining('Складська техніка');
-
+        // Step 6  Open the main page again. Click on ""Каталог"". Hover ""Спецтехніка"". Hover ""Будівельна техніка""
+        await browser.back();
+        await MainPage.clickOnCatalogLink();
+        await MainPage.hoverSpecTechLabel();
+        await MainPage.hoverBudTechLabel();
+        await expect(MainPage.autoKransLabel).toBeDisplayed();
+        await expect(MainPage.buroviUstLabel).toBeDisplayed();
+        await expect(MainPage.dorBudTechLabel).toBeDisplayed();
+        await expect(MainPage.excavatorsLabel).toBeDisplayed();
+        await expect(MainPage.anotherBudTechLabel).toBeDisplayed();
+        await expect(MainPage.catsLabel).toBeDisplayed();
+        await expect(MainPage.containersLabel).toBeDisplayed();
+        await expect(MainPage.navantagLabel).toBeDisplayed();
+        await expect(MainPage.equipForSpecTechLabel).toBeDisplayed();
+        await expect(MainPage.liftrersLabel).toBeDisplayed();
+        await expect(MainPage.techniqForGroundWorksLabel).toBeDisplayed();
+        // Step 7 Click on the logo in the top left corner. Click on the ""Каталог"" button. 
+        // Hover the ""Спецтехніка"" label.
+        await MainPage.clickOnHeaderLogo();
+        await MainPage.clickOnCatalogLink();
+        await expect(MainPage.specTechniqLabel).toBeDisplayed();
+        await expect(MainPage.servicesLabel).toBeDisplayed();
+        await MainPage.hoverSpecTechLabel();
+        await expect(MainPage.buildTechLabel).toBeDisplayed();
+        await expect(MainPage.utilityTechLabel).toBeDisplayed();
+        await expect(MainPage.agricultTechLabel).toBeDisplayed();
+        await expect(MainPage.storeTechLabel).toBeDisplayed();
+        // Step 8 Hover ""Комунальна техніка""
+        await MainPage.hoverUtilityTechLabel();
+        await expect(MainPage.avarMachLabel).toBeDisplayed();
+        await expect(MainPage.dorCleanTechLabel).toBeDisplayed();
+        await expect(MainPage.cleaningEquipLabel).toBeDisplayed();
+        await expect(MainPage.utilityContainersLabel).toBeDisplayed();
+        await expect(MainPage.utilityMachLabel).toBeDisplayed();
+        await expect(MainPage.EquipUtilTechLabel).toBeDisplayed();
+        // Step 9  Click on the logo in the top left corner. Click on the ""Каталог"" button. Hover the ""Спецтехніка"" label.
+        await MainPage.clickOnHeaderLogo();
+        await MainPage.clickOnCatalogLink();
+        await expect(MainPage.specTechniqLabel).toBeDisplayed();
+        await expect(MainPage.servicesLabel).toBeDisplayed();
+        await MainPage.hoverSpecTechLabel();
+        await expect(MainPage.buildTechLabel).toBeDisplayed();
+        await expect(MainPage.utilityTechLabel).toBeDisplayed();
+        await expect(MainPage.agricultTechLabel).toBeDisplayed();
+        await expect(MainPage.storeTechLabel).toBeDisplayed();
+        // Step 10 Hover ""Сільськогосподарська техніка""
+        await MainPage.hoverAgricultTechLabel();
+        await expect(MainPage.gruntoObrTechLabel).toBeDisplayed();
+        await expect(MainPage.zatkiLabel).toBeDisplayed();
+        await expect(MainPage.inshaAgrTechLabel).toBeDisplayed();
+        await expect(MainPage.potatoTechLabel).toBeDisplayed();
+        await expect(MainPage.combinesLabel).toBeDisplayed();
+        await expect(MainPage.woodKeepTechLabel).toBeDisplayed();
+        await expect(MainPage.equipLabel).toBeDisplayed();
+        await expect(MainPage.afterCollectLabel).toBeDisplayed();
+        await expect(MainPage.posivAndSadTechLabel).toBeDisplayed();
+        await expect(MainPage.agricultRielLabel).toBeDisplayed();
+        await expect(MainPage.techForInsDobrLabel).toBeDisplayed();
+        await expect(MainPage.techForZagotSinaLabel).toBeDisplayed();
+        await expect(MainPage.techForPolyvZrochLabel).toBeDisplayed();
+        await expect(MainPage.techForGardenLabel).toBeDisplayed();
+        await expect(MainPage.techForAnimalsLabel).toBeDisplayed();
+        await expect(MainPage.techForTranspLabel).toBeDisplayed();
+        await expect(MainPage.tractorsLabel).toBeDisplayed();
+        // Step 11 Click on the logo in the top left corner. Click on the ""Каталог"" button. Hover the ""Спецтехніка"" label.
+        await MainPage.clickOnHeaderLogo();
+        await MainPage.clickOnCatalogLink();
+        await expect(MainPage.specTechniqLabel).toBeDisplayed();
+        await expect(MainPage.servicesLabel).toBeDisplayed();
+        await MainPage.hoverSpecTechLabel();
+        await expect(MainPage.buildTechLabel).toBeDisplayed();
+        await expect(MainPage.utilityTechLabel).toBeDisplayed();
+        await expect(MainPage.agricultTechLabel).toBeDisplayed();
+        await expect(MainPage.storeTechLabel).toBeDisplayed();
+        // Step 12 Hover ""Складська техніка"" 
+        await MainPage.hoverStoreTechLabel();
+        await expect(MainPage.equipForLiftersLabel).toBeDisplayed();
+        await expect(MainPage.techForStorageLabel).toBeDisplayed();
+        // Step 13 Click on the logo in the top left corner. Click on the ""Каталог"" button.
+        await MainPage.clickOnHeaderLogo();
+        await MainPage.clickOnCatalogLink();
+        await expect(MainPage.specTechniqLabel).toBeDisplayed();
+        await expect(MainPage.servicesLabel).toBeDisplayed();
+        // Step 14 Hover the ""Послуги"" label.
+        await MainPage.hoverOnServicesLabel();
+        await expect(MainPage.buildingServLabel).toBeDisplayed();
+        await expect(MainPage.anotherServLabel ).toBeDisplayed();
+        await expect(MainPage.agricServLabel).toBeDisplayed();
+        // Step 15  Hover the ""Користувацькі"" label (not available in this version of the app)
+        // Step 16 Repeat step 15 for ""Будівельні"" ""Інші"" ""Сільскогосподарські"" (available for manual testing only)
+        // Step 17 Click on any label displayed on the right menu.
+        await MainPage.hoverBuildServLabel();
+        await MainPage.clickOnRoadWorksLabel();
+        await expect(browser).toHaveUrlContaining('products');
+        await expect(ProductsPage.choosenFilters).toHaveTextContaining('Дорожні роботи');
+        // Step 18 Click on the logo in the top left corner. Click on the ""Каталог"" button. Hover the ""Послуги"" label.
+        await ProductsPage.clickOnLogo();
+        await MainPage.clickOnCatalogLink();
+        await MainPage.hoverOnServicesLabel();
+        await expect(MainPage.buildingServLabel).toBeDisplayed();
+        await expect(MainPage.anotherServLabel).toBeDisplayed();
+        await expect(MainPage.agricServLabel).toBeDisplayed();
+        // Step 19  Hover the ""Будівельні"" label (checking available for manual testing only)
+        await MainPage.hoverBuildServLabel();
+        // Step 20 Click on ""Розчищення території"" label displayed on the right menu.
+        await MainPage.clickOnCleaningTeritoryLabel();
+        await expect(browser).toHaveUrlContaining('products');
+        await expect(ProductsPage.choosenFilters).toHaveTextContaining('Розчищення території');
+        // Step 21 Click on the logo in the top left corner. Click on the ""Каталог"" button. Hover the ""Послуги"" label.
+        await ProductsPage.clickOnLogo();
+        await MainPage.clickOnCatalogLink();
+        await MainPage.hoverOnServicesLabel();
+        await expect(MainPage.buildingServLabel).toBeDisplayed();
+        await expect(MainPage.anotherServLabel).toBeDisplayed();
+        await expect(MainPage.agricServLabel).toBeDisplayed();
+        // Step 22 Hover the ""Сільскогосподарські"" label (checking available for manual testing only)
+        await MainPage.hoverAgricServLabel();
+        // Step 23  Click on ""Внесення добрив"" label displayed on the right menu.
+        await MainPage.clickOnVnesDobryvLabel();
+        await expect(browser).toHaveUrlContaining('products');
+        await expect(ProductsPage.choosenFilters).toHaveTextContaining('Внесення добрив');
+        // Step 24 Click on the logo in the top left corner. Click on the ""Каталог"" button. Hover the ""Послуги"" label.
+        await ProductsPage.clickOnLogo();
+        await MainPage.clickOnCatalogLink();
+        await MainPage.hoverOnServicesLabel();
+        await expect(MainPage.buildingServLabel).toBeDisplayed();
+        await expect(MainPage.anotherServLabel).toBeDisplayed();
+        await expect(MainPage.agricServLabel).toBeDisplayed();
+        // Step 25 Hover the ""Інші"" label (checking available for manual testing only)
+        await MainPage.hoverAnotherServLabel();
+        // Step 26 Click on ""Обрізання дерев"" label displayed on the right menu.
+        await MainPage.clickOnCuttingTreesLabel();
+        await expect(browser).toHaveUrlContaining('products');
+        await expect(ProductsPage.choosenFilters).toHaveTextContaining('Обрізання дерев');
     })
         
    

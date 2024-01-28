@@ -1,18 +1,10 @@
 import { $ } from '@wdio/globals';
-// import Page from './page';
 
-// const servicesBlocklok = 'section[data-testid="services"]'
-
-// class MainPage extends Page {
     class MainPage {
 
     public get servicesBlock () {
         return $('section[data-testid="services"]');
     }
-    // public get servicesBlock () {
-    //     return super.getElement(servicesBlocklok);
-    //     }
-        
     public get servicesBlockList () {
         return $('//*[@id="__next"]/div[3]/main/section[1]/div[2]');
     }
@@ -79,6 +71,12 @@ import { $ } from '@wdio/globals';
     public get popUpServices () {
         return $('div[data-testid="services"]');
     }
+    public get popUpServicesTitle () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[2]/div[2]/div/div[1]/h6[2]')
+    }
+    public get popUpCategoriesTitle () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[2]/div[2]/div/div[1]/h6[3]');
+    }
     public get popUpCategories () {
         return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[2]/div[2]/div/div[1]/div[3]');
     }
@@ -139,6 +137,138 @@ import { $ } from '@wdio/globals';
     public get storeTechLabel () {
         return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[2]/div[4]')
     }
+    public get autoKransLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[1]');
+    }
+    public get buroviUstLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[2]')
+    }
+    public get dorBudTechLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[3]')
+    }
+    public get excavatorsLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[4]')
+    }
+    public get anotherBudTechLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[5]')
+    }
+    public get catsLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[6]')
+    }
+    public get containersLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[7]')
+    }
+    public get navantagLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[8]')
+    }
+    public get equipForSpecTechLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[9]')
+    }
+    public get liftrersLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[10]')
+    }
+    public get techniqForGroundWorksLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[11]')
+    }
+    public get headerLogo () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[1]/div/div[1]/a/div');
+    }
+    public get avarMachLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[1]')
+    }
+    public get dorCleanTechLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[2]')
+    }
+    public get cleaningEquipLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[3]')
+    }
+    public get utilityContainersLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[4]')
+    }
+    public get utilityMachLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[5]')
+    }
+    public get EquipUtilTechLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[6]')
+    }
+    public get gruntoObrTechLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[1]')
+    }
+    public get zatkiLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[2]')
+    }
+    public get inshaAgrTechLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[3]')
+    }
+    public get potatoTechLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[4]')
+    }
+    public get combinesLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[5]')
+    }
+    public get woodKeepTechLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[6]')
+    }
+    public get equipLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[7]')
+    }
+    public get afterCollectLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[8]')
+    }
+    public get posivAndSadTechLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[9]')
+    }
+    public get agricultRielLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[10]')
+    }
+    public get techForInsDobrLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[11]')
+    }
+    public get techForZagotSinaLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[12]')
+    }
+    public get techForPolyvZrochLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[13]')
+    }
+    public get techForGardenLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[14]')
+    }
+    public get techForAnimalsLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[15]')
+    }
+    public get techForTranspLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[16]')
+    }
+    public get tractorsLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[17]')
+    }
+    public get equipForLiftersLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[1]')
+    }
+    public get techForStorageLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[2]')
+    }
+    public get buildingServLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[2]/div[1]')
+    }
+    public get anotherServLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[2]/div[2]')
+    }
+    public get agricServLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[2]/div[3]')
+    }
+    public get roadWorksLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[1]')
+    }
+    public get cleaningTeritoryLabel () {
+        return $('//*[@id="__next"]/div/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[4]')
+    }
+    public get vnesDobryvLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[3]')
+    }
+    public get cuttingTreesLabel () {
+        return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[5]')
+    }
     public async clickOnServicesItem (i:number) {
         (await $('//*[@id="__next"]/div[3]/main/section[1]/div[2]/div['+i+']')).click();
     }
@@ -146,7 +276,7 @@ import { $ } from '@wdio/globals';
         return (await $('//*[@id="__next"]/div[3]/main/section[1]/div[2]/div['+i+']')).getText(); 
     }
     public async clickOnSpecialEquipmentItem (i:number) {
-        (await $('//*[@id="__next"]/div[3]/main/section[2]/div[2]/div[1]/div['+i+']')).click();
+        (await $('//*[@id="__next"]/div[3]/main/section[2]/div[2]/div['+i+']/div[1]')).click();
     }
     public async getNameOfSpecialEquipmentItem (i:number) {
         return (await $('//*[@id="__next"]/div[3]/main/section[2]/div[2]/div[1]/div['+i+']')).getText(); 
@@ -173,6 +303,7 @@ import { $ } from '@wdio/globals';
         (await this.searchInput).click();
     }
     public async setValueInSearchInput (a:string) {
+         (await this.searchInput).clearValue();
         (await this.searchInput).setValue(a);
     }
     public async clickOnSerchResult (i:number) {
@@ -219,6 +350,45 @@ import { $ } from '@wdio/globals';
     }
     public async clickOnStoreTechLabel () {
         (await this.storeTechLabel).click();
+    }
+    public async hoverBudTechLabel () {
+        (await this.buildTechLabel).moveTo();
+    }
+    public async clickOnHeaderLogo () {
+        (await this.headerLogo).click();
+    }
+    public async hoverUtilityTechLabel () {
+        (await this.utilityTechLabel).moveTo();
+    }
+    public async hoverAgricultTechLabel () {
+        (await this.agricultTechLabel).moveTo();
+    }
+    public async hoverStoreTechLabel () {
+        (await this.storeTechLabel).moveTo();
+    }
+    public async hoverOnServicesLabel () {
+        (await this.servicesLabel).moveTo();
+    }
+    public async hoverBuildServLabel () {
+        (await this.buildingServLabel).moveTo();
+    }
+    public async clickOnRoadWorksLabel () {
+        (await this.roadWorksLabel).click();
+    }
+    public async clickOnCleaningTeritoryLabel () {
+        (await this.cleaningTeritoryLabel).click();
+    }
+    public async hoverAgricServLabel () {
+        (await this.agricServLabel).moveTo();
+    }
+    public async clickOnVnesDobryvLabel () {
+        (await this.vnesDobryvLabel).click();
+    }
+    public async hoverAnotherServLabel () {
+        (await this.anotherServLabel).moveTo();
+    }
+    public async clickOnCuttingTreesLabel () {
+        (await this.cuttingTreesLabel).click();
     }
 }
 
