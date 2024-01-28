@@ -134,7 +134,7 @@ describe('Test cases', () => {
         await expect(MainPage.emailLink).toHaveHref('mailto:info@rentzila.com.ua');
     })
 
-    it.only('Test-case #C530 part 1 Verify Search Input', async () => {
+    it('Test-case #C530 part 1 Verify Search Input', async () => {
         // Preconditions
         await browser.reloadSession();
         await browser.url('');
