@@ -28,6 +28,7 @@ describe('Test cases', () => {
         await expect(ProductsPage.unitsBlock).toBeDisplayed();
         // Step 3 Click on the first relevant unit.
         await ProductsPage.clickOnUnitBlock(1);
+        await browser.pause(2000);
         await expect(browser).toHaveUrlContaining('unit');
         await expect(UnitPage.servicesBlock).toHaveTextContaining(serviceName);
         // Step 4 Click on the logo in the left corner of the page.
