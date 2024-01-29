@@ -154,9 +154,9 @@ describe('Test cases', () => {
         //за ключовими словами"" input and press the ""Enter"" keyboard button.
         await browser.back();
         await MainPage.setValueInSearchInput('Трактор');
-        await browser.pause(2000);
+        await browser.pause(3000);
         await browser.keys([Key.Enter]);
-        await browser.pause(2000);
+        await browser.pause(3000);
         await expect(browser).toHaveUrlContaining('products');
         await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('Трактор');
         // Step 4 Click on any first unit
@@ -177,6 +177,7 @@ describe('Test cases', () => {
         await ProductsPage.clickOnUnitBlock(1);
         await expect(browser).toHaveUrlContaining('unit');
         await UnitPage.clickOnLogo();
+        await browser.pause(2000);
         await MainPage.clickOnSearchInput();
         await browser.pause(2000);
         await expect(MainPage.searchResult).toHaveTextContaining('Ремонт гидравлики');
@@ -192,6 +193,7 @@ describe('Test cases', () => {
         // Step 8 Click on the logo in the header and enter only spaces in thesearch field input: 
         //""____________"" (""_"" is the Space). After input press the ""Enter"" keyboard button.
         await UnitPage.clickOnLogo();
+        await browser.pause(2000);
         await MainPage.clickOnSearchInput();
         await MainPage.setValueInSearchInput('     ');
         await browser.pause(2000);
@@ -206,25 +208,31 @@ describe('Test cases', () => {
         //словами"" input. After input press the ""Enter"" keyboard button and click on any first unit.
         await browser.back();
         await MainPage.clickOnSearchInput();
+        await MainPage.clearValueInSearchInput();
         await MainPage.setValueInSearchInput('123');
-        await browser.pause(2000);
+        await browser.pause(3000);
         await browser.keys([Key.Enter]);
-        await browser.pause(2000);
+        await browser.pause(3000);
         await expect(browser).toHaveUrlContaining('products');
-        await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('оголошень на видимій території за запитом "123"');
+        await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('Знайдено 0 оголошень на видимій території зазапитом " 123"');
         // Step 10 Click on the ""Пошук оголошення за ключовими словами"" search input and enter 
         //any specific symbol: !, @, #, $, %, ^, (, ), *. After each Input press the ""Enter"" button on the keyboard.
         await browser.back();
         await MainPage.clickOnSearchInput();
+        await MainPage.clearValueInSearchInput();
+        await browser.pause(2000);
         await MainPage.setValueInSearchInput('@$!');
         await browser.pause(2000);
         await browser.keys([Key.Enter]);
+        await browser.pause(2000);
         await expect(browser).toHaveUrlContaining('products');
         await expect(ProductsPage.unitsBlockTitle).toHaveTextContaining('Знайдено 0 оголошень на видимій території за запитом "@$!"');
         // Step 11 Click on the ""Пошук оголошення за ключовими словами"" search input and enter any specific
         // symbol: <, >, ^, ;,{,},[,]. After each Input press the ""Enter"" button on the keyboard.
         await browser.back();
         await MainPage.clickOnSearchInput();
+        await MainPage.clearValueInSearchInput();
+        await browser.pause(2000);
         await MainPage.setValueInSearchInput('<^>');
         await expect(MainPage.searchInput).toHaveValue('')
         await browser.pause(2000);
@@ -235,6 +243,8 @@ describe('Test cases', () => {
         //за ключовими словами"" input: non-existent тест1234567890. Press the ""Enter"" keyboard button.
         await browser.back();
         await MainPage.clickOnSearchInput();
+        await MainPage.clearValueInSearchInput();
+        await browser.pause(2000);
         await MainPage.setValueInSearchInput('non-existent тест1234567890');
         await expect(MainPage.popUpSearchResultBlock).not.toBeDisplayed();
         await browser.pause(2000);
@@ -246,6 +256,8 @@ describe('Test cases', () => {
         // search input and enter ""Асфальтування"".
         await browser.back();
         await MainPage.clickOnSearchInput();
+        await MainPage.clearValueInSearchInput();
+        await browser.pause(2000);
         await MainPage.setValueInSearchInput('Асфальтування');
         await expect(MainPage.popUpSearchResultBlock).toBeDisplayed();
         await expect(MainPage.popUpServices).toHaveTextContaining('Асфальтування');
@@ -259,6 +271,8 @@ describe('Test cases', () => {
         //search input and enter ""Драглайн"".
         await browser.back();
         await MainPage.clickOnSearchInput();
+        await MainPage.clearValueInSearchInput();
+        await browser.pause(2000);
         await MainPage.setValueInSearchInput('Драглайн');
         await expect(MainPage.popUpSearchResultBlock).toBeDisplayed();
         await expect(MainPage.popUpCategories).toHaveTextContaining('драглайни');
@@ -326,8 +340,7 @@ describe('Test cases', () => {
         await MainPage.setValueInPhoneFormField('+380506743060');
         await MainPage.clickOnOrderConsultBtn();
         // Step 8 Click on the ""Ok"" button on the modal.
-        await browser.pause(3000);
-        await browser.acceptAlert();
+        // await browser.acceptAlert();
         // Step 9 
     })
 

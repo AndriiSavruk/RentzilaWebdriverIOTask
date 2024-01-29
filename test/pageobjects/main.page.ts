@@ -302,9 +302,11 @@ import { $ } from '@wdio/globals';
     public async clickOnSearchInput () {
         (await this.searchInput).click();
     }
-    public async setValueInSearchInput (a:string) {
-         (await this.searchInput).clearValue();
+    public async setValueInSearchInput (a:string) {   
         (await this.searchInput).setValue(a);
+    }
+    public async clearValueInSearchInput () {
+        (await this.searchInput).clearValue();
     }
     public async clickOnSerchResult (i:number) {
         (await $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[2]/div[2]/div/div[2]/div/div['+i+']')).click();
