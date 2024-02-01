@@ -188,7 +188,7 @@ import { $ } from '@wdio/globals';
     public get utilityMachLabel () {
         return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[5]')
     }
-    public get EquipUtilTechLabel () {
+    public get equipUtilTechLabel () {
         return $('//*[@id="__next"]/div[3]/header/div/div[2]/div/div[1]/div/div[3]/div[3]/div[6]')
     }
     public get gruntoObrTechLabel () {
@@ -323,11 +323,17 @@ import { $ } from '@wdio/globals';
     public async clickOnOrderConsultBtn () {
         (await this.orderConsultBtn).click();
     }
+    public async clearValueNameFormField () {
+        (await this.inputNameFormField).clearValue();
+    }
     public async setValueInNameFormField (a:string) {
         (await this.inputNameFormField).setValue(a);
     }
     public async clickOnInputPhoneFormField () {
         (await this.inputPhoneFormField).click();
+    }
+    public async clearValueInputPhoneFormField () {
+        (await this.inputPhoneFormField).clearValue();
     }
     public async addValueInPhoneFormField (i:number) {
         (await this.inputPhoneFormField).addValue(i);

@@ -4,6 +4,7 @@ import MainPage from '../pageobjects/main.page.ts'
 import ProductsPage from '../pageobjects/products.page.ts'
 import UnitPage from '../pageobjects/unit.page.ts'
 import TendersPage from '../pageobjects/tenders.page.ts'
+import feedbackAPIHelper from '../pageobjects/feedbackAPI.helper.ts'
 
 describe('Test cases', () => {
     it('Test-case #C212 Checking "Послуги" section on the main page', async () => {
@@ -338,11 +339,19 @@ describe('Test cases', () => {
         await expect(MainPage.phoneFormFieldNoValidErrorMessage).toBeDisplayed();
         // Step 7 Input the valid phone number into the ""Номер"" field: +380506743060 After input click on 
         // the ""Замовити консультацію"" button.
+        await MainPage.clearValueInputPhoneFormField();
         await MainPage.setValueInPhoneFormField('+380506743060');
         await MainPage.clickOnOrderConsultBtn();
         // Step 8 Click on the ""Ok"" button on the modal.
-        // await browser.acceptAlert();
-        // Step 9 
+        await browser.pause(3000);
+        await browser.acceptAlert();
+        // Step 9  Log in as the Admin to the Admin panel with credentials 
+        // and check that this feedback is present.
+        let apiToken:any = await feedbackAPIHelper.createAccessToken();
+        let feedbackList:any = await feedbackAPIHelper.getFeedBackList(apiToken);
+        let filteredList:any = await feedbackAPIHelper.feedbackFilter(feedbackList);
+        await expect(await filteredList[0].phone).toEqual('+380506743060');
+        
     })
 
     it('Test-case #C559 Verify ""Каталог""', async () => {
@@ -421,7 +430,7 @@ describe('Test cases', () => {
         await expect(MainPage.cleaningEquipLabel).toBeDisplayed();
         await expect(MainPage.utilityContainersLabel).toBeDisplayed();
         await expect(MainPage.utilityMachLabel).toBeDisplayed();
-        await expect(MainPage.EquipUtilTechLabel).toBeDisplayed();
+        await expect(MainPage.equipUtilTechLabel).toBeDisplayed();
         // Step 9  Click on the logo in the top left corner. Click on the ""Каталог"" button. Hover the ""Спецтехніка"" label.
         await MainPage.clickOnHeaderLogo();
         await MainPage.clickOnCatalogLink();
